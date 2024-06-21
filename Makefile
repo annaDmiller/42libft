@@ -4,11 +4,11 @@ RM = rm
 
 AR = ar
 
-CFLAGS = -Wall -Werror -Wextra -g3 -L$(LIB)
+CFLAGS = -Wall -Werror -Wextra -g3 -I.
 
-RMFLAGS = -rf
+RMFLAGS = -f
 
-AROPT = rs
+AROPT = rcs
 
 NAME = libft.a
 
@@ -27,24 +27,20 @@ SRCS_B = $(BONUS:c=o)
 
 LIB = libft.h
 
-$(NAME): all
+all: $(NAME)
 
-all: comp_all
+$(NAME): $(SRCS)
 	$(AR) $(AROPT) $(NAME) $(SRCS)
 
-comp_all: $(FILES)
-	$(CC) $(CFLAGS) -c $(FILES)
-
-bonus: all comp_bonus
+bonus: $(SRCS_B)
 	$(AR) $(AROPT) $(NAME) $(SRCS_B)
 
-comp_bonus: $(BONUS)
-	$(CC) $(CFLAGS) -c $(BONUS)
-
-clean: $(SRCS)
+clean:
 	$(RM) $(RMFLAGS) *.o
 
 fclean: clean
 	$(RM) $(RMFLAGS) $(NAME)
 
 re: fclean all
+
+.PHONY: all bonus clean fclean re
