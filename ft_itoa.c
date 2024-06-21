@@ -33,9 +33,9 @@ char	*ft_itoa(int n)
 	if (ret == NULL)
 		return (NULL);
 	ret[num_char + sign] = '\0';
-	while (--num_char >= 0)
+	while (num_char >= sign)
 	{
-		ret[num_char + sign] = (num % 10) + '0';
+		ret[--num_char + sign] = (num % 10) + '0';
 		num /= 10;
 	}
 	if (sign == 1)
@@ -48,7 +48,7 @@ static int	ft_count_char(long num)
 	int	result;
 
 	result = 0;
-	while (num > 10)
+	while (num >= 10)
 	{
 		result++;
 		num /= 10;
