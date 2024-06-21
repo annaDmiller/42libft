@@ -22,16 +22,20 @@ void	*ft_memmove(void *mem_dest, const void *mem_src, size_t n)
 		return (NULL);
 	dest = (unsigned char *) mem_dest;
 	src = (unsigned char *) mem_src;
-	index = n;
+	index = 0;
 	if (mem_dest > mem_src)
 	{
-		while (index >= 0)
-		{
+		index = n;
+		while (index-- > 0)
 			dest[index] = src[index];
-			index--;
-		}
 	}
 	else
-		ft_memcpy(mem_dest, mem_src, n);
+	{
+		while (index < n)
+		{
+			dest[index] = src[index];
+			index++;
+		}
+	}
 	return (mem_dest);
 }
